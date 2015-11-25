@@ -52,7 +52,7 @@
     of the first TLC to the SIN (TLC pin 26) of the next.  The rest of the pins
     are attached normally.
     \note Each TLC needs it's own IREF resistor */
-#define NUM_TLCS    1
+#define NUM_TLCS    2
 
 /** Determines how data should be transfered to the TLCs.  Bit-banging can use
     any two i/o pins, but the hardware SPI is faster.
@@ -91,14 +91,14 @@
     \f$\displaystyle TLC\_PWM\_PERIOD =
        \frac{(TLC\_GSCLK\_PERIOD + 1) * 4096}{2} \f$
     \note The default of 8192 means the PWM frequency is 976.5625Hz */
-#define TLC_PWM_PERIOD    8192
+#define TLC_PWM_PERIOD    4096
 
 /** Determines how long each period GSCLK is.
     This is related to TLC_PWM_PERIOD:
     \f$\displaystyle TLC\_GSCLK\_PERIOD =
        \frac{2 * TLC\_PWM\_PERIOD}{4096} - 1 \f$
     \note Default is 3 */
-#define TLC_GSCLK_PERIOD    3
+#define TLC_GSCLK_PERIOD    1
 
 /** Enables/disables VPRG (TLC pin 27) functionality.  If you need to set dot
     correction data, this needs to be enabled.

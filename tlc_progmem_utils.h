@@ -23,8 +23,11 @@
     PROGMEM utility functions for setting grayscale or dot correction data
     from PROGMEM.  See the UsingProgmem Example for an example. */
 
+#include <avr/pgmspace.h>
+#include <avr/io.h>
+
+#include "tlc_config.h"
 #include "Tlc5940.h"
-#include "pinouts/pin_functions.h"
 
 void tlc_setGSfromProgmem(prog_uint8_t *gsArray);
 #if VPRG_ENABLED
@@ -112,7 +115,8 @@ void tlc_setDCfromProgmem(prog_uint8_t *dcArray)
     while (p < dcArrayEnd) {
         tlc_shift8(pgm_read_byte(p++));
     }
-    pulse_pin(XLAT_PORT, XLAT_PIN);
+    XLAT_PORT |= _BV(XLAT_PIN);
+    XLAT_PORT &= ~_BV(XLAT_PIN);
 
     tlc_dcModeStop();
 }
